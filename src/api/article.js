@@ -7,6 +7,7 @@ export function login(data){
         url: "user/login",
         data
     })
+    // return request.post("user/login",data);
 }
 
 // 退出
