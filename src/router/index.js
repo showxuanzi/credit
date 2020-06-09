@@ -28,6 +28,23 @@ Vue.use(VueRouter)
         path: "/loan-input",
         name: "loan-input",
         component: () => import("../views/loan-input/index")
+      },
+      {
+        path: "/loan-approve",
+        name: "loan-approve",
+        component: () => import("../views/loan-approve/index"),
+        children: [
+          {
+            path: "/loan-approve/first",
+            name: "first",
+            component: () => import("../views/loan-approve/first")
+          },
+          {
+            path: "/loan-approve/end",
+            name: "first",
+            component: () => import("../views/loan-approve/end")
+          }
+        ]
       }
     ]
   }

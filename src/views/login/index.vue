@@ -1,8 +1,8 @@
 <template>
     <div class="login-box">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="用户名" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+            <el-form-item label="用户名" prop="account">
+                <el-input v-model="ruleForm.account"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input v-model="ruleForm.password" show-password></el-input>
@@ -19,17 +19,17 @@
     data() {
       return {
         ruleForm: {
-          name: '',
-          password: ''
+          account: 'admin',
+          password: 'admin@123'
         },
         rules: {
-          name: [
+          account: [
             { required: true, message: '请输入用户名', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 4 到 8 个字符', trigger: 'blur' }
+            { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
           ]
         }
       };
@@ -38,7 +38,14 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.$http.post("/user/login",this.ruleForm)
+            .then(res => {
+              console.log(res);
+              if(res.data.code === 20000){
+                localStorage.setItem("token",res.data.data.token);
+                this.$router.push("/home")
+              }
+            })
           } else {
             console.log('error submit!!');
             return false;
