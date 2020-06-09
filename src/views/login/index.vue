@@ -15,6 +15,8 @@
     </div>
 </template>
 <script>
+import {login} from "@/api/article";
+import {setToken} from "@/utils/token";
   export default {
     data() {
       return {
@@ -38,11 +40,20 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http.post("/user/login",this.ruleForm)
+            // this.$http.post("user/login",this.ruleForm)
+            // .then(res => {
+            //   console.log(res);
+            //   if(res.data.code === 20000){
+            //     localStorage.setItem("token",res.data.data.token);
+            //     this.$router.push("/home")
+            //   }
+            // })
+
+            login(this.ruleForm)
             .then(res => {
               console.log(res);
               if(res.data.code === 20000){
-                localStorage.setItem("token",res.data.data.token);
+                setToken(res.data.data.token);
                 this.$router.push("/home")
               }
             })
