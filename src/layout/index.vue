@@ -15,11 +15,11 @@
     </el-container>
 </template>
 <script>
-import NavLeft from "./commponents/NavLeft";
-import Header from "./commponents/Header";
-import Main from "./commponents/Main";
-import Footer from "./commponents/Footer";
-// import {NavLeft,Header,Main,Footer} from "./commponents";
+// import NavLeft from "./commponents/NavLeft";
+// import Header from "./commponents/Header";
+// import Main from "./commponents/Main";
+// import Footer from "./commponents/Footer";
+import {NavLeft,Header,Main,Footer} from "./commponents";
 export default {
   name: "layout",
   components: {
@@ -31,10 +31,12 @@ export default {
 }
 </script>
 <style>
+  .el-container{
+    height: 100%;
+  }
   .el-header {
     background-color: #B3C0D1;
     color: #333;
-    text-align: center;
     line-height: 60px;
   }
 

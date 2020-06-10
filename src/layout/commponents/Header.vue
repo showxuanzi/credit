@@ -1,6 +1,6 @@
 <template>
     <div>
-      <button @click="goback">退出</button>
+      <el-button type="text" @click="goback">退出</el-button>
     </div>
 </template>
 <script>

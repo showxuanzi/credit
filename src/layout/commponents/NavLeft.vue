@@ -3,10 +3,7 @@
   <!-- 引入进来需要加上router方能使用路由控制切换 -->
       <el-menu router
           default-active="/index"
-          class="el-menu-vertical-demo"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#1989fa">
+          class="el-menu-vertical-demo">
           <el-menu-item index="/index">
               <i class="el-icon-menu"></i>
               <span slot="title">首页</span>
@@ -16,23 +13,40 @@
               <span slot="title">贷款申请</span>
           </el-menu-item>
           <el-submenu index="/loan-approve">
-            <template slot="title">贷款审批</template>
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              贷款审批
+            </template>
             <el-menu-item index="/loan-approve/first">初审</el-menu-item>
             <el-menu-item index="/loan-approve/end">终审</el-menu-item>
           </el-submenu>
       </el-menu>
   </el-aside>
 </template>
-<style>
+<style lang="scss">
   .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
+    background-color: #222848;
     line-height: 200px;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
+    .el-menu{
+      background-color: #222848;
+      text-align: left;
+      border-right: none;
+      .el-menu-item{
+        color: #bedbed;
+        i{
+          color: #bedbed;
+        }
+      }
+      .el-menu-item:focus, .el-menu-item:hover,.el-submenu__title:hover{
+        background-color: #0085fe;
+        color: #fff;
+      }
+      .el-submenu__title{
+        color: #bedbed;
+        i{
+          color: #bedbed;
+        }
+      }
+    }
   }
 </style>
