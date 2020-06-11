@@ -2,7 +2,7 @@
   <el-aside width="200px">
   <!-- 引入进来需要加上router方能使用路由控制切换 -->
       <el-menu router
-          default-active="/index"
+          :default-active="$route.path" 
           class="el-menu-vertical-demo">
           <el-menu-item index="/index">
               <i class="el-icon-menu"></i>
@@ -11,6 +11,10 @@
           <el-menu-item index="/loan-input">
               <i class="el-icon-document"></i>
               <span slot="title">贷款申请</span>
+          </el-menu-item>
+          <el-menu-item index="/input-manager">
+              <i class="el-icon-document"></i>
+              <span slot="title">申请管理</span>
           </el-menu-item>
           <el-submenu index="/loan-approve">
             <template slot="title">
@@ -37,7 +41,7 @@
           color: #bedbed;
         }
       }
-      .el-menu-item:focus, .el-menu-item:hover,.el-submenu__title:hover{
+      .el-menu-item:focus, .el-menu-item:hover,.el-submenu__title:hover,.el-menu-item.is-active{
         background-color: #0085fe;
         color: #fff;
       }

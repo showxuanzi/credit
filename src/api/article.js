@@ -17,3 +17,30 @@ export function logout(){
         url: "user/logout"
     })
 }
+
+// 贷款申请
+export function loanCreate(data){
+    return request({
+        method: "post",
+        url: "loan/create",
+        data
+    })
+}
+
+// 申请管理列表
+export function loanList(data){
+    return request({
+        method: "get",
+        url: "loan/list",
+        params: data
+    })
+}
+
+// 提交申请
+export function loanSubmit(data){
+    return request({
+        method: "post",
+        url: "loan/submitToApprove",
+        data
+    })
+}

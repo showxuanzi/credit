@@ -1,18 +1,18 @@
 <template>
-    <div class="login-box">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="用户名" prop="account">
-                <el-input v-model="ruleForm.account"></el-input>
-            </el-form-item>
-            <el-form-item label="密码" prop="password">
-                <el-input v-model="ruleForm.password" show-password></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </el-form-item>
-            </el-form>
-    </div>
+  <div class="login-box">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="用户名" prop="account">
+          <el-input v-model="ruleForm.account"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+          <el-input v-model="ruleForm.password" show-password></el-input>
+      </el-form-item>
+      <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 <script>
 import {login} from "@/api/article";

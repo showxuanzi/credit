@@ -14,9 +14,9 @@
     </div>
 </template>
 <script>
-import PanelProup from "./panelProup";
-import Chart from './chart';
-import Map from './map';
+import PanelProup from "./components/panelProup";
+import Chart from './components/chart';
+import Map from './components/map';
 export default {
     data(){
         return{
