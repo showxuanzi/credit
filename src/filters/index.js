@@ -1,13 +1,13 @@
 export function statusFilter(data){
     switch(data){
         case 0 :
-            return "进件1";
+            return "进件";
         case 1 :
-            return "提交初审1";
+            return "提交初审";
         case 2 :
-            return "初审通过1";
+            return "初审通过";
         case 3 :
-            return "初审拒绝1";
+            return "初审拒绝";
         case 4 :
             return "提交终审";
         case 5 :
@@ -70,5 +70,29 @@ export function marriageFilter(data){
             return '未婚';
         default:
             return "未婚";
+    }
+}
+
+// 初审通过、未通过
+export function firstRusltFilter(data){
+    switch (data) {
+        case 'pass':
+            return '已通过';
+        case 'reject':
+            return '未通过';
+        default:
+            return "待操作";
+    }
+}
+
+// 初审状态标签
+export function firstStatusFilter(data){
+    switch (data) {
+        case 'pass':
+            return 'success';
+        case 'reject':
+            return 'danger';
+        default:
+            return "info";
     }
 }

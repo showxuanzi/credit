@@ -9,25 +9,15 @@
       </el-form-item>
     </el-form>
 		<el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
-			<el-table-column prop="loan_name" label="姓名"></el-table-column>
-			<el-table-column prop="loan_card" label="身份证号"></el-table-column>
-			<el-table-column prop="modified" label="提交时间">
+			<el-table-column prop="account" label="用户名"></el-table-column>
+			<el-table-column prop="password" label="密码"></el-table-column>
+			<el-table-column prop="reg_time" label="创建时间">
 					<template slot-scope="scope">
-						{{birthdayFilter(scope.row.modified)}}
+						{{birthdayFilter(scope.row.reg_time)}}
 					</template>
 			</el-table-column>
-			<el-table-column prop="result" label="状态">
-					<template slot-scope="scope" >
-						<el-tag :type="scope.row.result | firstStatusFilter" effect="plain">{{scope.row.result | firstRusltFilter}}</el-tag>
-					</template>
-			</el-table-column>
-			<el-table-column fixed="right" label="操作" width="240">
-				<template slot-scope="{row}">
-					<el-button type="primary" size="mini" @click="handelDetail(row)">查看</el-button>
-					<el-button type="success" size="mini" :disabled="row.result === 'pass'" @click="handelSuccess(row)">通过</el-button>
-					<el-button type="danger" size="mini" :disabled="row.result === 'reject'" @click="handelReject(row)">拒绝</el-button>
-				</template>
-			</el-table-column>
+				<el-table-column prop="creator" label="创建者"></el-table-column>
+			<el-table-column prop="role_name" label="权限类型"></el-table-column>
 		</el-table>
 		<!-- 分页 -->
 		<el-pagination
@@ -39,60 +29,10 @@
 			layout="total, sizes, prev, pager, next, jumper"
 			:total="rows">
 		</el-pagination>
-		<!-- 查看详情 -->
-    <el-dialog title="初审-查看详情" :visible.sync="dialogFormVisible">
-      <el-form ref="updateForm" :inline="true" :model="temp" label-position="left" label-width="70px" style="width: 100%; " size="mini" disabled>
-          <el-card class="box-card">
-						<div slot="header" class="clearfix">
-							<span>个人基本信息</span>
-						</div>
-						<el-form-item label="ID" prop="id" v-show="false">
-							<el-input v-model="temp.id" />
-							</el-form-item>
-						<el-form-item label="姓名" prop="name">
-							<el-input v-model="temp.name" />
-						</el-form-item>
-						<el-form-item label="身份证" prop="identity_card">
-							<el-input v-model.number="temp.identity_card" />
-						</el-form-item>
-						<el-form-item label="出生日期" prop="birthday">
-							<el-date-picker type="datetime" v-model="temp.birthday" />
-						</el-form-item>
-						<el-form-item label="性别" prop="sex">
-							<el-select v-model="temp.sex" class="filter-item" placeholder="Please select">
-								<el-option v-for="item in sexOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-							</el-select>
-						</el-form-item>
-						<el-form-item label="婚姻状况" prop="marriage">
-							<el-select v-model="temp.marriage" class="filter-item" placeholder="Please select">
-								<el-option v-for="item in marriageOptions" :key="item.key" 
-									:label="item.display_name" :value="item.key" />
-							</el-select>
-						</el-form-item>
-						<el-form-item label="教育程度" prop="education">
-							<el-select v-model="temp.education" class="filter-item" placeholder="Please select">
-								<el-option v-for="item in educationOptions" :key="item.key" :label="item.display_name" :value="item.key" />
-							</el-select>
-						</el-form-item>
-						<el-form-item label="居住地址" prop="address1">
-							<el-input v-model="temp.address1" />
-						</el-form-item>
-						<el-form-item label="户籍地址" prop="address2">
-							<el-input v-model="temp.address2" />
-						</el-form-item>
-						<el-form-item label="居住电话" prop="phone">
-							<el-input v-model.number="temp.phone" />
-						</el-form-item>
-						<el-form-item label="手机号" prop="mobile_phone">
-							<el-input v-model.number="temp.mobile_phone" />
-						</el-form-item>
-					</el-card>
-      </el-form>
-    </el-dialog>
     </div>
 </template>
 <script>
-import {approveEndList,loanQuery,approveEndPass,approveEndReject} from "@/api/article";
+import {loanQuery,approveEndPass,approveEndReject,userList} from "@/api/article";
 import {sexOptions,educationOptions,marriageOptions} from "@/utils/selectData";
 
 export default {
@@ -145,13 +85,11 @@ export default {
 				}
 			},
 			getList(){ // 获取列表数据
-				approveEndList(this.listQuery).then(res =>{
+				userList(this.listQuery).then(res =>{
+					console.log(res)
 					let {code} = res.data;
 					if(code === 20000){
-						let {data,pages,rows} = res.data.data.data;
-						this.tableData = data;
-						this.pages = pages;
-						this.rows = rows;
+						this.tableData = res.data.data;
 					}
 				})
 			},

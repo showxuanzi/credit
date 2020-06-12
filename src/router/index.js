@@ -52,8 +52,30 @@ VueRouter.prototype.push = function push(location) {
           },
           {
             path: "/loan-approve/end",
-            name: "first",
+            name: "end",
             component: () => import("../views/loan-approve/end")
+          }
+        ]
+      },
+      {
+        path: "/contract-manager",//标的管理
+        name: "contract-manager",
+        component: () => import("../views/contract-manager/index")
+      },
+      {
+        path: "/permission",//权限管理
+        name: "permission",
+        component: () => import("../views/permission/index"),
+        children: [
+          {
+            path: "/permission/create",
+            name: "create",
+            component: () => import("../views/permission/create")
+          },
+          {
+            path: "/permission/list",
+            name: "list",
+            component: () => import("../views/permission/list")
           }
         ]
       }

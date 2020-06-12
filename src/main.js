@@ -4,8 +4,10 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
-import '@/styles/common.css';
+import '@/styles/common.css'; // 公共样式
 import * as filters from "./filters/index"; //* 表示所有的，filters是别名
+import animated from "animate.css";
+
  
 // axios封装在utils/request.js
 // import axios from "axios";
@@ -14,6 +16,7 @@ import * as filters from "./filters/index"; //* 表示所有的，filters是别�
 // Vue.prototype.$http = axios;
 
 Vue.use(ElementUI);
+Vue.use(animated);
 
 // 添加全局过滤器
 Object.keys(filters).forEach(key =>{
