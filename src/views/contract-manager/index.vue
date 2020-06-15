@@ -129,7 +129,7 @@ export default {
 					if(res.data.code === 20000){
 						this.$notify({
 							title: '成功',
-							message: '生成合同成功！',
+							message: '下载合同成功！',
 							type: 'success',
 							duration: 2000
 						});
