@@ -20,7 +20,7 @@
 			<el-table-column prop="role_name" label="权限类型"></el-table-column>
 		</el-table>
 		<!-- 分页 -->
-		<el-pagination
+		<!-- <el-pagination
 			@size-change="handleSizeChange"
 			@current-change="handleCurrentChange"
 			:current-page="listQuery.pageNo"
@@ -28,7 +28,7 @@
 			:page-size="listQuery.pageSize"
 			layout="total, sizes, prev, pager, next, jumper"
 			:total="rows">
-		</el-pagination>
+		</el-pagination> -->
     </div>
 </template>
 <script>
@@ -88,6 +88,7 @@ export default {
 				userList(this.listQuery).then(res =>{
 					console.log(res)
 					let {code} = res.data;
+					this.rows = res.data.data.length;
 					if(code === 20000){
 						this.tableData = res.data.data;
 					}

@@ -136,11 +136,19 @@ export function contractList(data){
 }
 
 // 标的管理-生成合同
-export function createFile(data){
+export function contractCreate(data){
     return request({
         method: "post",
         url: "contract/createFile",
         data
+    })
+}
+// 标的管理-下载合同
+export function contractDownload(data){
+    return request({
+        method: "get",
+        url: "contract/download",
+        params: data
     })
 }
 

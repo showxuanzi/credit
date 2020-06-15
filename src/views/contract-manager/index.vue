@@ -28,8 +28,8 @@
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" width="240">
 				<template slot-scope="{row}">
-					<el-button type="primary" size="mini" :disabled="row.file_path !== null" @click="createFile(row)">生成合同</el-button>
-					<el-button type="danger" size="mini" :disabled="row.file_path === null" @click="downloadFile(row)">下载合同</el-button>
+					<el-button type="primary" size="mini" :disabled="row.file_path !== null" @click="handleCreate(row)">生成合同</el-button>
+					<el-button type="danger" size="mini" :disabled="row.file_path === null" @click="handleDownload(row)">下载合同</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -46,8 +46,8 @@
     </div>
 </template>
 <script>
-import {contractList} from "@/api/article";
-
+import {contractList,contractCreate,contractDownload} from "@/api/article";
+import {getToken} from "@/utils/token";
 export default {
 		data() {
       return {
@@ -84,12 +84,6 @@ export default {
 				}
 				return i
 			},
-			createFile(){
-
-			},
-			downloadFile(){
-
-			},
 			getList(){ // 获取列表数据
 				contractList(this.listQuery).then(res =>{
 					let {code} = res.data;
@@ -113,6 +107,59 @@ export default {
       handleCurrentChange(val = this.listQuery.pageNo) { 
 				this.listQuery.pageNo = val;
 				this.getList();
+			},
+			handleCreate(row){
+				contractCreate({id: row.id}).then(res => {
+					console.log(res);
+					if(res.data.code === 20000){
+						this.getList();
+						this.$notify({
+							title: '成功',
+							message: '生成合同成功！',
+							type: 'success',
+							duration: 2000
+						});
+					}
+				})
+			},
+			handleDownload(row){
+				console.log(row)
+				contractDownload({id: row.id}).then(res => {
+					console.log(res);
+					if(res.data.code === 20000){
+						this.$notify({
+							title: '成功',
+							message: '生成合同成功！',
+							type: 'success',
+							duration: 2000
+						});
+						let _url = "http://139.196.42.209:5004" + res.data.data.url;
+						console.log(_url)
+						this.downloadFile(_url);
+					}
+				})
+			},
+			downloadFile(url){
+				var xhr = new XMLHttpRequest();
+				xhr.open('get',url);
+				xhr.responseType = "blob"; // 返回字节流
+				xhr.setRequestHeader("token",getToken()); // 在头部传入token
+				xhr.onload = () => {
+					if(xhr.status === 200){
+						var filename = xhr.responseURL.substring(xhr.responseURL.lastIndexOf("/")+1);
+						this.saveAs(filename,xhr.response);
+					}
+				};
+				xhr.send();
+			},
+			saveAs(name,data){
+				var urlObject = window.URL; // window对象的URL对象是专门用来将blob或者file读取成一个url的
+				var export_blob = new Blob([data]); // 代表二进制类型的大对象，就是Blob对象是二进制数据
+				var save_link = document.createElement("a"); //创建a标签
+				save_link.href = urlObject.createObjectURL(export_blob); // 通过URL。createURL（blob）可以获取当前文件的下载路径
+				save_link.download = name; // 利用a标签的download属性
+				save_link.click(); // 触发a标签的点击事件
+
 			}
     }
     
