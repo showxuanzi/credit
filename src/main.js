@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/common.css'; // 公共样式
 import * as filters from "./filters/index"; //* 表示所有的，filters是别名
 import animated from "animate.css";
+import "./permission"; //权限文件
 
  
 // axios封装在utils/request.js

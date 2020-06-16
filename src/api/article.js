@@ -18,6 +18,14 @@ export function logout(){
     })
 }
 
+// 获取用户信息
+export function userInfo(){
+    return request({
+        method: "get",
+        url: "user/info"
+    })
+}
+
 // 贷款申请
 export function loanCreate(data){
     return request({

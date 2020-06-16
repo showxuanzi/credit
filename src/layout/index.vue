@@ -35,9 +35,11 @@ export default {
     height: 100%;
   }
   .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
+    background-color: #222848;
+    color: #bedbed;
+    line-height: 56px;
+    height: 60px;
+    padding: 0 10px;
   }
 
 </style>

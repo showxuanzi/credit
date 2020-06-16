@@ -4,7 +4,7 @@
       <el-menu router
           :default-active="$route.path" 
           class="el-menu-vertical-demo">
-          <el-menu-item index="/index">
+          <el-menu-item index="/home">
               <i class="el-icon-menu"></i>
               <span slot="title">首页</span>
           </el-menu-item>
