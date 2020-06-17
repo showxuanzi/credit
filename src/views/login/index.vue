@@ -51,10 +51,10 @@ import {setToken} from "@/utils/token";
 
             login(this.ruleForm)
             .then(res => {
-              console.log(res);
               if(res.data.code === 20000){
                 setToken(res.data.data.token);
-                this.$router.push("/home")
+                console.log("denglu ")
+                this.$router.push("/home");
               }
             })
           } else {

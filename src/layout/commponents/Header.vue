@@ -3,9 +3,6 @@
       <div class="head-breadcrumb">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item v-for="(v,i) in matched" :key="i" :to="v.path">{{v.meta.title}}</el-breadcrumb-item>
-          <!-- <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item> -->
         </el-breadcrumb>
       </div>
       <div class="head-menu">
@@ -15,7 +12,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <span @click="goback">退出</span>
+              <span @click="goback($event)">退出</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -23,13 +20,14 @@
     </div>
 </template>
 <script>
-import {logout} from "@/api/article";
+// import {logout} from "@/api/article";
 import {getToken,reomveToken} from "@/utils/token";
 export default {
   name: "layout-header",
   data(){
     return{
-      matched: []
+      matched: [],
+      roles:[]
     }
   },
   watch: {
@@ -38,19 +36,21 @@ export default {
     }
   },
   created(){
-    this.getBreadcrumb()
+    this.getBreadcrumb();
   },
   methods:{
-    goback(){
-      console.log("sss")
+    goback(e){
       let token = getToken();
+      console.log(e.target)
+      console.log("tuichu")
       if(token){
-        logout().then(res => {
+        // 退出并清除vuex中的信息
+        this.$store.dispatch("LOGINOUT").then(res => {
           if(res.data.code === 20000){
             reomveToken();
             this.$router.push("/login");
           }
-        })
+        });
       }else{
         reomveToken();
         this.$router.push("/login");

@@ -4,41 +4,28 @@
       <el-menu router
           :default-active="$route.path" 
           class="el-menu-vertical-demo">
-          <el-menu-item index="/home">
-              <i class="el-icon-menu"></i>
-              <span slot="title">首页</span>
-          </el-menu-item>
-          <el-menu-item index="/loan-input">
-              <i class="el-icon-document"></i>
-              <span slot="title">贷款申请</span>
-          </el-menu-item>
-          <el-menu-item index="/input-manager">
-              <i class="el-icon-document"></i>
-              <span slot="title">申请管理</span>
-          </el-menu-item>
-          <el-submenu index="/loan-approve">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              贷款审批
-            </template>
-            <el-menu-item index="/loan-approve/first">初审</el-menu-item>
-            <el-menu-item index="/loan-approve/end">终审</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="/contract-manager">
-              <i class="el-icon-document"></i>
-              <span slot="title">标的管理</span>
-          </el-menu-item>
-          <el-submenu index="/permission">
-            <template slot="title">
-              <i class="el-icon-menu"></i>
-              权限管理
-            </template>
-            <el-menu-item index="/permission/create">创建人员</el-menu-item>
-            <el-menu-item index="/permission/list">列表展示</el-menu-item>
-          </el-submenu>
+          <NavItem v-for="route in get_routes[0].children" :key="route.path"
+          :item="route" :base-path="route.path" />
       </el-menu>
   </el-aside>
 </template>
+<script>
+import {mapGetters} from "vuex";
+import NavItem from "./NavItem";
+export default {  
+  data(){
+    return{
+
+    }
+  },
+  computed: {
+    ...mapGetters(["get_routes"])
+  },
+  components:{
+    NavItem
+  }
+}
+</script>
 <style lang="scss">
   .el-aside {
     background-color: #222848;

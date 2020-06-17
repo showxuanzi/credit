@@ -1,9 +1,5 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
 import {getToken} from "@/utils/token";
-import {userInfo} from "@/api/article";
-
-Vue.use(Vuex)
+import {userInfo,logout} from "@/api/article";
 
 const state = {
   token: getToken(),
@@ -16,6 +12,9 @@ const getters = {
 const mutations = {
   SET_ROLES: (state,roles) => {
     state.roles = roles;
+  },
+  SET_TOKEN: (state,token) => {
+    state.token = token;
   }
 };
 const actions = {
@@ -25,9 +24,24 @@ const actions = {
       userInfo(state.token).then(response => {
         const{data} = response.data;
         commit("SET_ROLES",data.roles);
+        console.log(response)
         resolve(data);
       }).catch(error => {
         reject(error)
+      })
+    })
+  },
+  //  退出登录，退出需要清除vuex中的信息
+  LOGINOUT({commit,state}){
+    return new Promise((resolve,reject) => {
+      logout(state.token).then(response => {
+        if(response.data.code === 20000){
+          commit("SET_ROLES",[]);
+          commit("SET_TOKEN","");
+        }
+        resolve(response);  
+      }).catch(error =>{
+        reject(error);
       })
     })
   }
