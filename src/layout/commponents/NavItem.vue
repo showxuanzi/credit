@@ -9,6 +9,7 @@
 				<i class="el-icon-menu"></i>
 				{{item.meta.title}}
 			</template>
+			<!-- 递归调用 -->
 			<subItem v-for="route in item.children" :key="route.path"
 			:item="route" :base-path="resolvePath(route.path)"/>
 		</el-submenu>
