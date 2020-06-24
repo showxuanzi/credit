@@ -2,6 +2,8 @@ import axios from "axios";
 import {getToken} from "@/utils/token";
 import {Message} from "element-ui";
 
+// 配置环境变量以后可以直接使用
+// axios.defaults.baseURL = process.env.VUE_APP_URL;
 axios.defaults.baseURL = "http://139.196.42.209:5004/api/";
 
 // 请求拦截器

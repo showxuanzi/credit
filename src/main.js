@@ -16,6 +16,9 @@ import "./permission"; //权限文件
 // axios.defaults.baseURL = "http://139.196.42.209:5004/api/";
 // Vue.prototype.$http = axios;
 
+// 访问环境变量，process是node中的变量，打包以后会被解析
+console.log(process.env.NODE_ENV,process.env.VUE_APP_URL);
+
 Vue.use(ElementUI);
 Vue.use(animated);
 
