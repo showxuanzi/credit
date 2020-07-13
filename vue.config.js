@@ -1,7 +1,7 @@
 let compressionWebpackPlugin = require("compression-webpack-plugin"); //引入gzip依赖，gzip对文件进一步压缩
 module.exports = {
     // 打包文件访问的相对目录，独立项目，通过项目的根目录访问
-    publicPath: "/credit",//在github上运行
+    publicPath: "/credit/dist",//在github上运行
     // publicPath: "./",
     // 在子域下访问项目，打包后在dist文件夹下创建map文件夹，把所有文件放进去
     // publicPath: "/map/",
