@@ -21,20 +21,22 @@ axios.interceptors.request.use(function(config){
 // 响应拦截器
 axios.interceptors.response.use(function(response){
     // 响应数据
-    if(response.data.code !== 20000){
-        if(response.data.code === 10001){
-            Message({
-                message: 'token不存在或已过期，请重新登录！',
+    if(getToken() !== null && response.url !== "user/info"){
+        if(response.data.code !== 20000){
+            if(response.data.code === 10001){
+                Message({
+                    message: 'token不存在或已过期，请重新登录！',
+                    type: 'error',
+                    duration: 2000
+                });
+            }else{
+                Message({
+                message: '错误代码：'+ response.data.message,
                 type: 'error',
                 duration: 2000
             });
-        }else{
-					Message({
-            message: '错误代码：'+ response.data.message,
-            type: 'error',
-            duration: 2000
-        });
-				}
+                    }
+        }
     }
     return response;
 },function(error){
