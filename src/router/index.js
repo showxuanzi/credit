@@ -70,7 +70,7 @@ export const asyncRoutes = [
 
 const router = new VueRouter({
   // linkActiveClass:"is-active",
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: normalRoutes
 })
