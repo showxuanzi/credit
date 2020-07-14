@@ -1,17 +1,19 @@
 <template>
-  <div class="login-box">
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="用户名" prop="account">
-          <el-input v-model="ruleForm.account"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-          <el-input v-model="ruleForm.password" show-password></el-input>
-      </el-form-item>
-      <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="login-app">
+    <div class="login-box">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="account">
+            <el-input v-model="ruleForm.account"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+            <el-input v-model="ruleForm.password" show-password></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 <script>
@@ -70,6 +72,11 @@ import {setToken} from "@/utils/token";
   }
 </script>
 <style scoped>
+  .login-app{
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/image/bg.jpg") 100% 100%;
+  }
     .login-box{
       width: 500px;
       height: 300px;
@@ -80,5 +87,6 @@ import {setToken} from "@/utils/token";
       border: 1px solid #ccc;
       border-radius: 10px;
       padding: 50px 20px;
+      background-color: rgba(255,255,255,0.4);
     }
 </style>
